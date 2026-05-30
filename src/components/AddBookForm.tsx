@@ -224,7 +224,7 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ onAddBook }) => {
           {/* Synopsis */}
           <div>
             <label className="block text-[10px] font-bold text-lit-sage uppercase tracking-widest mb-1.5 font-mono">
-              Sinopsis Buku Singkat
+              BLURB
             </label>
             <textarea
               placeholder="Tuliskan gambaran cerita atau pembahasan singkat dalam buku agar pembaca lain tertarik..."

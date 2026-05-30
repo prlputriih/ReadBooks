@@ -191,7 +191,7 @@ export const AiRecommendationPanel: React.FC<AiRecommendationPanelProps> = ({
           <div className="text-center">
             <h5 className="font-serif italic font-bold text-sm text-lit-charcoal">Merajut Saran Istimewa...</h5>
             <p className="text-[11px] text-slate-500 max-w-xs mt-1">
-              Gemini AI sedang menyeleksi sinopsis dan alasan kecocokan khusus untuk Anda. Harap tunggu sebentar.
+              Sedang menyeleksi untuk Anda. Harap tunggu sebentar.
             </p>
           </div>
         </div>
