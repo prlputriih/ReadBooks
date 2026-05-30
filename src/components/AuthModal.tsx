@@ -8,7 +8,7 @@ import {
   signInWithPopup
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { X, Mail, Lock, User, LogIn, UserPlus, Loader2 } from 'lucide-react';
+import { X, Mail, Lock, User, LogIn, UserPlus, Loader2, Eye, EyeOff } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -23,6 +23,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, triggerTo
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   
   // Loading & error status
   const [loading, setLoading] = useState(false);
@@ -117,6 +118,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, triggerTo
         case 'auth/wrong-password':
         case 'auth/invalid-credential':
           friendlyMessage = 'Kombinasi email atau kata sandi salah. Silakan periksa kembali.';
+          break;
+        case 'auth/operation-not-allowed':
+          friendlyMessage = "Metode Email & Kata Sandi belum diaktifkan di Firebase Console Anda. Silakan hubungkan dengan tombol 'Masuk dengan Google' di bawah, atau masuk ke Firebase Console dan aktifkan metode 'Email/Password' di menu Authentication > Sign-in method.";
           break;
         default:
           if (err.message) {
@@ -237,15 +241,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, triggerTo
               <div className="relative">
                 <Lock className="absolute left-3.5 top-2.5 w-4.5 h-4.5 text-slate-400" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Min. 6 karakter"
                   disabled={loading}
-                  className="w-full bg-slate-50 border border-slate-200 focus:border-lit-sage/50 focus:bg-white rounded-xl py-2 px-3 pl-10 text-xs text-slate-850 outline-hidden transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-lit-sage/50 focus:bg-white rounded-xl py-2 px-3 pl-10 pr-10 text-xs text-slate-850 outline-hidden transition-all"
                   id="input-auth-password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 focus:outline-hidden transition-colors cursor-pointer"
+                  title={showPassword ? "Sembunyikan Kata Sandi" : "Tampilkan Kata Sandi"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
               </div>
             </div>
 
