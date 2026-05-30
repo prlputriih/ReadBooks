@@ -1,210 +1,195 @@
 {
   "entities": {
-    "user": {
-      "title": "User Profile",
-      "description": "Information about the registered user.",
+    "User": {
+      "title": "User",
+      "description": "User profile with information synchronized upon auth registration",
       "type": "object",
       "properties": {
         "userId": {
-          "type": "string"
+          "type": "string",
+          "description": "Unik ID milik user"
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Nama tampilan pengguna"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "description": "Email address of the authenticated user"
         },
         "photoURL": {
-          "type": "string"
+          "type": "string",
+          "description": "Optional profile photo URL of the user"
         },
         "updatedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Tanggal profil terakhir diperbarui"
         }
       },
-      "required": [
-        "userId",
-        "email",
-        "updatedAt"
-      ]
+      "required": ["userId", "displayName"]
     },
-    "customBook": {
-      "title": "Custom Book",
-      "description": "A book registered in the system by a user.",
+    "Book": {
+      "title": "Book",
+      "description": "Custom book added by a user to their catalog",
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Identifier key for the book"
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "description": "Judul buku"
         },
         "author": {
-          "type": "string"
+          "type": "string",
+          "description": "Penulis buku"
         },
         "category": {
-          "type": "string"
+          "type": "string",
+          "description": "Kategori atau genre buku"
         },
         "rating": {
-          "type": "number"
+          "type": "number",
+          "description": "Rating buku"
         },
         "reviewsCount": {
-          "type": "number"
+          "type": "number",
+          "description": "Jumlah total ulasan"
         },
         "reviews": {
-          "type": "array"
+          "type": "array",
+          "description": "Nested reviews inline arrays"
         },
         "duration": {
-          "type": "string"
+          "type": "string",
+          "description": "Perkiraan durasi waktu baca"
         },
         "pages": {
-          "type": "number"
+          "type": "number",
+          "description": "Jumlah halaman"
         },
         "coverColor": {
-          "type": "string"
+          "type": "string",
+          "description": "Utility warna cover Tailwind"
         },
         "synopsis": {
-          "type": "string"
+          "type": "string",
+          "description": "Ringkasan sinopsis cerita"
         },
         "buyUrl": {
-          "type": "string"
-        },
-        "isCustom": {
-          "type": "boolean"
+          "type": "string",
+          "description": "Tautan opsional pembelian buku"
         },
         "createdBy": {
-          "type": "string"
+          "type": "string",
+          "description": "ID pengguna pembuat buku"
         },
         "createdAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Waktu pembuatan data buku"
         }
       },
-      "required": [
-        "id",
-        "title",
-        "author",
-        "category",
-        "rating",
-        "reviewsCount",
-        "duration",
-        "pages",
-        "coverColor",
-        "synopsis",
-        "isCustom",
-        "createdBy"
-      ]
+      "required": ["id", "title", "author", "category"]
     },
-    "readingListItem": {
-      "title": "Reading List Item",
-      "description": "A bookmark in the user's reading list.",
+    "ReadingListItem": {
+      "title": "ReadingListItem",
+      "description": "Tracks bookmarks and progress status of reading books",
       "type": "object",
       "properties": {
         "bookId": {
-          "type": "string"
+          "type": "string",
+          "description": "ID of reference book"
         },
         "progressStatus": {
           "type": "string",
-          "enum": [
-            "ingin_dibaca",
-            "sedang_dibaca",
-            "selesai"
-          ]
+          "enum": ["ingin_dibaca", "sedang_dibaca", "selesai"],
+          "description": "Status progres membaca"
         },
         "notes": {
-          "type": "string"
+          "type": "string",
+          "description": "User specific personal book notes"
         },
         "savedAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Timestamp data bookmark ditambahkan"
         },
         "userId": {
-          "type": "string"
+          "type": "string",
+          "description": "ID pemilik bookmark"
         }
       },
-      "required": [
-        "bookId",
-        "progressStatus",
-        "savedAt",
-        "userId"
-      ]
+      "required": ["bookId", "progressStatus", "savedAt", "userId"]
     },
-    "userNote": {
-      "title": "User Note",
-      "description": "User's scratchpad notes synchronized.",
+    "Notepad": {
+      "title": "Notepad",
+      "description": "Personal scroll book notes text",
       "type": "object",
       "properties": {
         "text": {
-          "type": "string"
-        },
-        "updatedAt": {
-          "type": "string"
-        },
-        "userId": {
-          "type": "string"
+          "type": "string",
+          "description": "Content of notepad text notes"
         }
       },
-      "required": [
-        "text",
-        "updatedAt",
-        "userId"
-      ]
+      "required": ["text"]
     },
-    "review": {
-      "title": "Book Review",
-      "description": "User reviews for books.",
+    "Review": {
+      "title": "Review",
+      "description": "Public review comment made by user for any book in catalogue",
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        },
-        "bookId": {
-          "type": "string"
+          "type": "string",
+          "description": "ID ulasan"
         },
         "reviewerName": {
-          "type": "string"
+          "type": "string",
+          "description": "Nama pengulas"
         },
         "rating": {
-          "type": "number"
+          "type": "number",
+          "description": "Nilai rating"
         },
         "comment": {
-          "type": "string"
+          "type": "string",
+          "description": "Isi ulasan komentar"
         },
         "createdAt": {
-          "type": "string"
+          "type": "string",
+          "description": "Tanggal pengiriman ulasan"
+        },
+        "bookId": {
+          "type": "string",
+          "description": "ID referensi buku"
         },
         "userId": {
-          "type": "string"
+          "type": "string",
+          "description": "ID pengulas terautentikasi"
         }
       },
-      "required": [
-        "id",
-        "bookId",
-        "reviewerName",
-        "rating",
-        "comment",
-        "createdAt",
-        "userId"
-      ]
+      "required": ["id", "reviewerName", "rating", "comment", "bookId"]
     }
   },
   "firestore": {
     "users/{userId}": {
-      "schema": "user",
-      "description": "User profiles."
+      "schema": "User",
+      "description": "User profile collection doc"
     },
     "users/{userId}/books/{bookId}": {
-      "schema": "customBook",
-      "description": "Custom books added by the user."
+      "schema": "Book",
+      "description": "Collection of custom books registered by user"
     },
     "users/{userId}/readingList/{bookId}": {
-      "schema": "readingListItem",
-      "description": "Reading progress tracking for a book."
+      "schema": "ReadingListItem",
+      "description": "Bookmarks details containing list and and progress"
     },
-    "users/{userId}/notes/{noteId}": {
-      "schema": "userNote",
-      "description": "User notepad scratchpad document."
+    "users/{userId}/notes/notepad": {
+      "schema": "Notepad",
+      "description": "Individual single notepad page for personalized journaling"
     },
     "reviews/{reviewId}": {
-      "schema": "review",
-      "description": "User review submissions."
+      "schema": "Review",
+      "description": "Collective feedback reviews feed for any specific book catalogue rating"
     }
   }
 }
